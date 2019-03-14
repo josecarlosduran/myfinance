@@ -1,0 +1,43 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Cuenta;
+
+/**
+ * Subclase
+ *
+ * @ORM\Table(name="subclases")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SubclaseRepository")
+ */
+class Subclase
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255)
+     */
+    private $descripcion;
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="Clase")
+	*/
+	private $clase;
+	/**
+	* @ORM\OneToMany(targetEntity="Anotacion", mappedBy="subclase")
+	*/
+	private $anotaciones;
+
+
+   
+}

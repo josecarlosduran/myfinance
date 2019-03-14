@@ -1,0 +1,152 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EsquemaImportacion
+ *
+ * @ORM\Table(name="esquemas_importacion")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EsquemaImportacionRepository")
+ */
+class EsquemaImportacion
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255)
+     */
+    private $descripcion;
+
+    /**
+	* @ORM\ManyToOne(targetEntity="Cuenta")
+	*/
+    private $cuenta;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="lineasCabecera", type="integer")
+     */
+    private $lineasCabecera;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="separadorCampos", type="string", length=255)
+     */
+    private $separadorCampos;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="puntoDecimal", type="string", length=255)
+     */
+    private $puntoDecimal;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="separadorMiles", type="string", length=255)
+     */
+    private $separadorMiles;
+
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="formatoFecha", type="string", length=255)
+     */
+    private $formatoFecha;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="inversionSigno", type="boolean")
+     */
+    private $inversionSigno;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo1", type="string", length=255, nullable=true)
+     */
+    private $campo1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo2", type="string", length=255, nullable=true)
+     */
+    private $campo2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo3", type="string", length=255, nullable=true)
+     */
+    private $campo3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo4", type="string", length=255, nullable=true)
+     */
+    private $campo4;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo5", type="string", length=255, nullable=true)
+     */
+    private $campo5;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo6", type="string", length=255, nullable=true)
+     */
+    private $campo6;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo7", type="string", length=255, nullable=true)
+     */
+    private $campo7;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo8", type="string", length=255, nullable=true)
+     */
+    private $campo8;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo9", type="string", length=255, nullable=true)
+     */
+    private $campo9;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Campo10", type="string", length=255, nullable=true)
+     */
+    private $campo10;
+
+
+    
+
+}

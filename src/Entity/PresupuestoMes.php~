@@ -1,0 +1,54 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PresupuestoMes
+ *
+ * @ORM\Table(name="presupuestos_meses")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PresupuestoMesRepository")
+ */
+class PresupuestoMes
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mes", type="string", length=2)
+     */
+    private $mes;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="importe", type="float")
+     */
+    private $importe;
+
+    /**
+     
+     * @ORM\OneToOne(targetEntity="Subclase")
+     * @ORM\JoinColumn(name="subclase_id", referencedColumnName="id")
+     */
+    private $subclase;
+
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="Presupuesto", inversedBy="presupuestosmeses")
+     * @ORM\JoinColumn(name="presupuesto_id", referencedColumnName="id")
+     */
+    private $presupuesto;
+	
+	
+}
+

@@ -1,0 +1,52 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FormaPago
+ *
+ * @ORM\Table(name="formas_pago")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FormaPagoRepository")
+ */
+class FormaPago
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255)
+     */
+    private $descripcion;
+
+    /**
+	* @ORM\ManyToOne(targetEntity="TipoFormaPago")
+	*/
+    private $tipo;
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="Cuenta")
+	*/
+	private $cuenta;
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="PlanCargo")
+	*/
+	private $plancargo;
+	
+	/**
+	* @ORM\OneToMany(targetEntity="Anotacion", mappedBy="formaPago")
+	*/
+	private $anotaciones;
+	
+
+}

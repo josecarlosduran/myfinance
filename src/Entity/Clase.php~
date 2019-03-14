@@ -1,0 +1,38 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Clase
+ *
+ * @ORM\Table(name="clases")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ClaseRepository")
+ */
+class Clase
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255)
+     */
+    private $descripcion;
+	
+	/**
+	* @ORM\OneToMany(targetEntity="Anotacion", mappedBy="clase")
+	*/
+	private $anotaciones;
+
+
+    
+}
