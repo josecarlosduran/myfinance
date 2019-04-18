@@ -1,14 +1,14 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Version
  *
- * @ORM\Table(name="versiones")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\VersionRepository")
+ * @ORM\Table(name="versiones",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\VersionRepository")
  */
 class Version
 
@@ -81,11 +81,11 @@ class Version
     /**
      * Add anotacione
      *
-     * @param \AppBundle\Entity\Anotacion $anotacione
+     * @param \App\Entity\Anotacion $anotacione
      *
      * @return Version
      */
-    public function addAnotacione(\AppBundle\Entity\Anotacion $anotacione)
+    public function addAnotacione(\App\Entity\Anotacion $anotacione)
     {
         $this->anotaciones[] = $anotacione;
 
@@ -95,9 +95,9 @@ class Version
     /**
      * Remove anotacione
      *
-     * @param \AppBundle\Entity\Anotacion $anotacione
+     * @param \App\Entity\Anotacion $anotacione
      */
-    public function removeAnotacione(\AppBundle\Entity\Anotacion $anotacione)
+    public function removeAnotacione(\App\Entity\Anotacion $anotacione)
     {
         $this->anotaciones->removeElement($anotacione);
     }

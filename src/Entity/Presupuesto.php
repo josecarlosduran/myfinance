@@ -1,14 +1,14 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Presupuesto	
  *
- * @ORM\Table(name="presupuestos")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PresupuestoRepository")
+ * @ORM\Table(name="presupuestos",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\PresupuestoRepository")
  */
 class Presupuesto
 {
@@ -118,11 +118,11 @@ class Presupuesto
     /**
      * Set mes
      *
-     * @param \AppBundle\Entity\Mes $mes
+     * @param \App\Entity\Mes $mes
      *
      * @return Presupuesto
      */
-    public function setMes(\AppBundle\Entity\Mes $mes = null)
+    public function setMes(\App\Entity\Mes $mes = null)
     {
         $this->mes = $mes;
 
@@ -132,7 +132,7 @@ class Presupuesto
     /**
      * Get mes
      *
-     * @return \AppBundle\Entity\Mes
+     * @return \App\Entity\Mes
      */
     public function getMes()
     {
@@ -142,11 +142,11 @@ class Presupuesto
     /**
      * Set subclase
      *
-     * @param \AppBundle\Entity\Subclase $subclase
+     * @param \App\Entity\Subclase $subclase
      *
      * @return Presupuesto
      */
-    public function setSubclase(\AppBundle\Entity\Subclase $subclase = null)
+    public function setSubclase(\App\Entity\Subclase $subclase = null)
     {
         $this->subclase = $subclase;
 
@@ -156,7 +156,7 @@ class Presupuesto
     /**
      * Get subclase
      *
-     * @return \AppBundle\Entity\Subclase
+     * @return \App\Entity\Subclase
      */
     public function getSubclase()
     {

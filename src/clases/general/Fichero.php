@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace AppBundle\clases\general;
+namespace App\clases\general;
 
 /**
  * Description of Ficheros

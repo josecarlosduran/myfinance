@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Anyo
  *
- * @ORM\Table(name="anyos")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\AnyoRepository")
+ * @ORM\Table(name="anyos",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\AnyoRepository")
  */
 class Anyo
 {

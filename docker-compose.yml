@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  web:
+    image: apache_php72_sf4:latest
+    container_name: myfinance2_apache_php72_sf4
+    ports:
+      - '80:80'
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/
+  db:
+    image: mysql:5.6
+    container_name: myfinance2_mysql56
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'myfinance'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'myfinance'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'nPK10110'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'nPK10110'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./mysql:/var/lib/mysql

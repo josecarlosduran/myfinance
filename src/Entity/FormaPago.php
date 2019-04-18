@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * FormaPago
  *
- * @ORM\Table(name="formas_pago")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FormaPagoRepository")
+ * @ORM\Table(name="formas_pago",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\FormaPagoRepository")
  */
 class FormaPago
 {
@@ -94,11 +94,11 @@ class FormaPago
     /**
      * Set tipo
      *
-     * @param \AppBundle\Entity\TipoFormaPago $tipo
+     * @param \App\Entity\TipoFormaPago $tipo
      *
      * @return FormaPago
      */
-    public function setTipo(\AppBundle\Entity\TipoFormaPago $tipo = null)
+    public function setTipo(\App\Entity\TipoFormaPago $tipo = null)
     {
         $this->tipo = $tipo;
 
@@ -108,7 +108,7 @@ class FormaPago
     /**
      * Get tipo
      *
-     * @return \AppBundle\Entity\TipoFormaPago
+     * @return \App\Entity\TipoFormaPago
      */
     public function getTipo()
     {
@@ -118,11 +118,11 @@ class FormaPago
     /**
      * Set cuenta
      *
-     * @param \AppBundle\Entity\Cuenta $cuenta
+     * @param \App\Entity\Cuenta $cuenta
      *
      * @return FormaPago
      */
-    public function setCuenta(\AppBundle\Entity\Cuenta $cuenta = null)
+    public function setCuenta(\App\Entity\Cuenta $cuenta = null)
     {
         $this->cuenta = $cuenta;
 
@@ -132,7 +132,7 @@ class FormaPago
     /**
      * Get cuenta
      *
-     * @return \AppBundle\Entity\Cuenta
+     * @return \App\Entity\Cuenta
      */
     public function getCuenta()
     {
@@ -142,11 +142,11 @@ class FormaPago
     /**
      * Set plancargo
      *
-     * @param \AppBundle\Entity\PlanCargo $plancargo
+     * @param \App\Entity\PlanCargo $plancargo
      *
      * @return FormaPago
      */
-    public function setPlancargo(\AppBundle\Entity\PlanCargo $plancargo = null)
+    public function setPlancargo(\App\Entity\PlanCargo $plancargo = null)
     {
         $this->plancargo = $plancargo;
 
@@ -156,7 +156,7 @@ class FormaPago
     /**
      * Get plancargo
      *
-     * @return \AppBundle\Entity\PlanCargo
+     * @return \App\Entity\PlanCargo
      */
     public function getPlancargo()
     {
@@ -166,11 +166,11 @@ class FormaPago
     /**
      * Add anotacione
      *
-     * @param \AppBundle\Entity\Anotacion $anotacione
+     * @param \App\Entity\Anotacion $anotacione
      *
      * @return FormaPago
      */
-    public function addAnotacione(\AppBundle\Entity\Anotacion $anotacione)
+    public function addAnotacione(\App\Entity\Anotacion $anotacione)
     {
         $this->anotaciones[] = $anotacione;
 
@@ -180,9 +180,9 @@ class FormaPago
     /**
      * Remove anotacione
      *
-     * @param \AppBundle\Entity\Anotacion $anotacione
+     * @param \App\Entity\Anotacion $anotacione
      */
-    public function removeAnotacione(\AppBundle\Entity\Anotacion $anotacione)
+    public function removeAnotacione(\App\Entity\Anotacion $anotacione)
     {
         $this->anotaciones->removeElement($anotacione);
     }

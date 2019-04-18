@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Clase
  *
- * @ORM\Table(name="clases")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ClaseRepository")
+ * @ORM\Table(name="clases",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\ClaseRepository")
  */
 class Clase
 {
@@ -80,11 +80,11 @@ class Clase
     /**
      * Add anotaciones
      *
-     * @param \AppBundle\Entity\Anotacion $anotaciones
+     * @param \App\Entity\Anotacion $anotaciones
      *
      * @return Clase
      */
-    public function addAnotaciones(\AppBundle\Entity\Anotacion $anotaciones)
+    public function addAnotaciones(\App\Entity\Anotacion $anotaciones)
     {
         $this->anotaciones[] = $anotaciones;
 
@@ -94,9 +94,9 @@ class Clase
     /**
      * Remove anotaciones
      *
-     * @param \AppBundle\Entity\Anotacion $anotaciones
+     * @param \App\Entity\Anotacion $anotaciones
      */
-    public function removeAnotaciones(\AppBundle\Entity\Anotacion $anotaciones)
+    public function removeAnotaciones(\App\Entity\Anotacion $anotaciones)
     {
         $this->anotaciones->removeElement($anotaciones);
     }

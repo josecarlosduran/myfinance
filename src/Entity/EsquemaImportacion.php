@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * EsquemaImportacion
  *
- * @ORM\Table(name="esquemas_importacion")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\EsquemaImportacionRepository")
+ * @ORM\Table(name="esquemas_importacion",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\EsquemaImportacionRepository")
  */
 class EsquemaImportacion
 {
@@ -571,11 +571,11 @@ class EsquemaImportacion
     /**
      * Set cuenta
      *
-     * @param \AppBundle\Entity\Cuenta $cuenta
+     * @param \App\Entity\Cuenta $cuenta
      *
      * @return EsquemaImportacion
      */
-    public function setCuenta(\AppBundle\Entity\Cuenta $cuenta = null)
+    public function setCuenta(\App\Entity\Cuenta $cuenta = null)
     {
         $this->cuenta = $cuenta;
 
@@ -585,7 +585,7 @@ class EsquemaImportacion
     /**
      * Get cuenta
      *
-     * @return \AppBundle\Entity\Cuenta
+     * @return \App\Entity\Cuenta
      */
     public function getCuenta()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * PresupuestoMes
  *
  * @ORM\Table(name="presupuestos_meses")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PresupuestoMesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PresupuestoMesRepository")
  */
 class PresupuestoMes
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * EsquemaImportacion
  *
  * @ORM\Table(name="esquemas_importacion")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\EsquemaImportacionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EsquemaImportacionRepository")
  */
 class EsquemaImportacion
 {

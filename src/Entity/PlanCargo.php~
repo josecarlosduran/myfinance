@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * PlanCargo
  *
  * @ORM\Table(name="planes_cargo")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\datos_maestros\PlanCargoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\datos_maestros\PlanCargoRepository")
  */
 class PlanCargo
 {

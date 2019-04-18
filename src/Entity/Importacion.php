@@ -1,14 +1,14 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Importacion
  *
- * @ORM\Table(name="importaciones")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ImportacionRepository")
+ * @ORM\Table(name="importaciones",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\ImportacionRepository")
  */
 class Importacion
 {
@@ -143,11 +143,11 @@ class Importacion
     /**
      * Add anotacione
      *
-     * @param \AppBundle\Entity\Anotacion $anotacione
+     * @param \App\Entity\Anotacion $anotacione
      *
      * @return Importacion
      */
-    public function addAnotacione(\AppBundle\Entity\Anotacion $anotacione)
+    public function addAnotacione(\App\Entity\Anotacion $anotacione)
     {
         $this->anotaciones[] = $anotacione;
 
@@ -157,9 +157,9 @@ class Importacion
     /**
      * Remove anotacione
      *
-     * @param \AppBundle\Entity\Anotacion $anotacione
+     * @param \App\Entity\Anotacion $anotacione
      */
-    public function removeAnotacione(\AppBundle\Entity\Anotacion $anotacione)
+    public function removeAnotacione(\App\Entity\Anotacion $anotacione)
     {
         $this->anotaciones->removeElement($anotacione);
     }

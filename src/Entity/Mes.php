@@ -1,14 +1,14 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Mes
  *
- * @ORM\Table(name="meses")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\MesRepository")
+ * @ORM\Table(name="meses",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\MesRepository")
  */
 class Mes
 {

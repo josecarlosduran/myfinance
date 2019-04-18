@@ -1,15 +1,15 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Cuenta;
+use App\Entity\Cuenta;
 
 /**
  * Subclase
  *
- * @ORM\Table(name="subclases")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SubclaseRepository")
+ * @ORM\Table(name="subclases",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\SubclaseRepository")
  */
 class Subclase
 {
@@ -92,11 +92,11 @@ class Subclase
     /**
      * Set clase
      *
-     * @param \AppBundle\Entity\Clase $clase
+     * @param \App\Entity\Clase $clase
      *
      * @return Subclase
      */
-    public function setClase(\AppBundle\Entity\Clase $clase = null)
+    public function setClase(\App\Entity\Clase $clase = null)
     {
         $this->clase = $clase;
 
@@ -106,7 +106,7 @@ class Subclase
     /**
      * Get clase
      *
-     * @return \AppBundle\Entity\Clase
+     * @return \App\Entity\Clase
      */
     public function getClase()
     {
@@ -117,11 +117,11 @@ class Subclase
     /**
      * Set clase
      *
-     * @param \AppBundle\Entity\Cuenta $cuenta
+     * @param \App\Entity\Cuenta $cuenta
      *
      * @return cuenta
      */
-    public function setCuenta(\AppBundle\Entity\Cuenta $cuenta = null)
+    public function setCuenta(\App\Entity\Cuenta $cuenta = null)
     {
         $this->cuenta = $cuenta;
 
@@ -131,7 +131,7 @@ class Subclase
     /**
      * Get cuenta
      *
-     * @return \AppBundle\Entity\Cuenta
+     * @return \App\Entity\Cuenta
      */
     public function getCuenta()
     {
@@ -141,11 +141,11 @@ class Subclase
     /**
      * Add anotacione
      *
-     * @param \AppBundle\Entity\Anotacion $anotacione
+     * @param \App\Entity\Anotacion $anotacione
      *
      * @return Subclase
      */
-    public function addAnotacione(\AppBundle\Entity\Anotacion $anotacione)
+    public function addAnotacione(\App\Entity\Anotacion $anotacione)
     {
         $this->anotaciones[] = $anotacione;
 
@@ -155,9 +155,9 @@ class Subclase
     /**
      * Remove anotacione
      *
-     * @param \AppBundle\Entity\Anotacion $anotacione
+     * @param \App\Entity\Anotacion $anotacione
      */
-    public function removeAnotacione(\AppBundle\Entity\Anotacion $anotacione)
+    public function removeAnotacione(\App\Entity\Anotacion $anotacione)
     {
         $this->anotaciones->removeElement($anotacione);
     }

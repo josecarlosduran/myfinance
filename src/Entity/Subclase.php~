@@ -1,15 +1,15 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Cuenta;
+use App\Entity\Cuenta;
 
 /**
  * Subclase
  *
  * @ORM\Table(name="subclases")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SubclaseRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SubclaseRepository")
  */
 class Subclase
 {

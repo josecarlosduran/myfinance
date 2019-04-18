@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Anotacion
  *
- * @ORM\Table(name="anotaciones")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\AnotacionRepository")
+ * @ORM\Table(name="anotaciones",options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="MyISAM"})
+ * @ORM\Entity(repositoryClass="App\Repository\AnotacionRepository")
  */
 class Anotacion
 {
@@ -277,11 +277,11 @@ class Anotacion
     /**
      * Set clase
      *
-     * @param \AppBundle\Entity\Clase $clase
+     * @param \App\Entity\Clase $clase
      *
      * @return Anotacion
      */
-    public function setClase(\AppBundle\Entity\Clase $clase = null)
+    public function setClase(\App\Entity\Clase $clase = null)
     {
         $this->clase = $clase;
 
@@ -291,7 +291,7 @@ class Anotacion
     /**
      * Get clase
      *
-     * @return \AppBundle\Entity\Clase
+     * @return \App\Entity\Clase
      */
     public function getClase()
     {
@@ -301,11 +301,11 @@ class Anotacion
     /**
      * Set subclase
      *
-     * @param \AppBundle\Entity\Subclase $subclase
+     * @param \App\Entity\Subclase $subclase
      *
      * @return Anotacion
      */
-    public function setSubclase(\AppBundle\Entity\Subclase $subclase = null)
+    public function setSubclase(\App\Entity\Subclase $subclase = null)
     {
         $this->subclase = $subclase;
 
@@ -315,7 +315,7 @@ class Anotacion
     /**
      * Get subclase
      *
-     * @return \AppBundle\Entity\Subclase
+     * @return \App\Entity\Subclase
      */
     public function getSubclase()
     {
@@ -326,11 +326,11 @@ class Anotacion
     /**
      * Set agrupacion
      *
-     * @param \AppBundle\Entity\Agrupacion $agrupacion
+     * @param \App\Entity\Agrupacion $agrupacion
      *
      * @return Anotacion
      */
-    public function setAgrupacion(\AppBundle\Entity\Agrupacion $agrupacion = null)
+    public function setAgrupacion(\App\Entity\Agrupacion $agrupacion = null)
     {
         $this->agrupacion = $agrupacion;
 
@@ -340,7 +340,7 @@ class Anotacion
     /**
      * Get agrupacion
      *
-     * @return \AppBundle\Entity\Agrupacion
+     * @return \App\Entity\Agrupacion
      */
     public function getAgrupacion()
     {
@@ -352,11 +352,11 @@ class Anotacion
     /**
      * Set version
      *
-     * @param \AppBundle\Entity\Version $version
+     * @param \App\Entity\Version $version
      *
      * @return Anotacion
      */
-    public function setVersion(\AppBundle\Entity\Version $version)
+    public function setVersion(\App\Entity\Version $version)
     {
         $this->version = $version;
 
@@ -366,7 +366,7 @@ class Anotacion
     /**
      * Get version
      *
-     * @return \AppBundle\Entity\Version
+     * @return \App\Entity\Version
      */
     public function getVersion()
     {
@@ -376,11 +376,11 @@ class Anotacion
     /**
      * Set formaPago
      *
-     * @param \AppBundle\Entity\FormaPago $formaPago
+     * @param \App\Entity\FormaPago $formaPago
      *
      * @return Anotacion
      */
-    public function setFormaPago(\AppBundle\Entity\FormaPago $formaPago = null)
+    public function setFormaPago(\App\Entity\FormaPago $formaPago = null)
     {
         $this->formaPago = $formaPago;
 
@@ -390,7 +390,7 @@ class Anotacion
     /**
      * Get formaPago
      *
-     * @return \AppBundle\Entity\FormaPago
+     * @return \App\Entity\FormaPago
      */
     public function getFormaPago()
     {
@@ -400,11 +400,11 @@ class Anotacion
     /**
      * Set cuenta
      *
-     * @param \AppBundle\Entity\Cuenta $cuenta
+     * @param \App\Entity\Cuenta $cuenta
      *
      * @return Anotacion
      */
-    public function setCuenta(\AppBundle\Entity\Cuenta $cuenta)
+    public function setCuenta(\App\Entity\Cuenta $cuenta)
     {
         $this->cuenta = $cuenta;
 
@@ -414,7 +414,7 @@ class Anotacion
     /**
      * Get cuenta
      *
-     * @return \AppBundle\Entity\Cuenta
+     * @return \App\Entity\Cuenta
      */
     public function getCuenta()
     {
@@ -424,11 +424,11 @@ class Anotacion
     /**
      * Set importacion
      *
-     * @param \AppBundle\Entity\Importacion $importacion
+     * @param \App\Entity\Importacion $importacion
      *
      * @return Anotacion
      */
-    public function setImportacion(\AppBundle\Entity\Importacion $importacion = null)
+    public function setImportacion(\App\Entity\Importacion $importacion = null)
     {
         $this->importacion = $importacion;
 
@@ -438,7 +438,7 @@ class Anotacion
     /**
      * Get importacion
      *
-     * @return \AppBundle\Entity\Importacion
+     * @return \App\Entity\Importacion
      */
     public function getImportacion()
     {

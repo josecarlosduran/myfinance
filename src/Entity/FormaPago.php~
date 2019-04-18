@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * FormaPago
  *
  * @ORM\Table(name="formas_pago")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FormaPagoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\FormaPagoRepository")
  */
 class FormaPago
 {
