@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+<div class = "row">
+
+	<div class="col-lg-4 col-md-6 col-xs-12">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">Saldo Cuentas Bancarias</h5>
+			</div>
+			<div class="card-body">
+	    	<canvas id="myChart" width="400" height="400"></canvas>
+				<script>
+					var ctx = document.getElementById("myChart");
+					var myChart = new Chart(ctx, {{ graficaCuentas["grafica"] | json_encode |raw }});
+				</script>
+			</div>
+			<div class="card-footer">
+				<h6 class="card-subtitle mb-2 text-muted">Total {{graficaCuentas["datos"]["total"]}} €</h6>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-4 col-md-6 col-xs-12">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">Gastos por categorias</h5>
+			</div>
+			<div class="card-body">
+				<canvas id="myChart2" width="400" height="400"></canvas>
+				<script>
+					var ctx2 = document.getElementById("myChart2");
+					var myChart2 = new Chart(ctx2, {{ graficaAgrupaciones["grafica"] | json_encode |raw }});
+				</script>
+			</div>
+			<div class="card-footer">
+				<h6 class="card-subtitle mb-2 text-muted">Total {{ graficaAgrupaciones["datos"]["total"] }} €</h6>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-4 col-md-6 col-xs-12">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">Evolucion Mensual Saldo</h5>
+			</div>
+			<div class="card-body">
+				<canvas id="myChart3" width="400" height="400"></canvas>
+				<script>
+					var ctx3 = document.getElementById("myChart3");
+					var myChart3 = new Chart(ctx3, {{ graficaEvolucionSaldo["grafica"] | json_encode |raw }});
+				</script>
+			</div>
+			<div class="card-footer">
+				<h6 class="card-subtitle mb-2 text-muted">&nbsp</h6>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-4 col-md-6 col-xs-12">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">Evolucion Anual Saldo</h5>
+			</div>
+			<div class="card-body">
+				<canvas id="myChart4" width="400" height="400"></canvas>
+				<script>
+					var ctx4 = document.getElementById("myChart4");
+					var myChart4 = new Chart(ctx4, {{ graficaEvolucionSaldoAnual["grafica"] | json_encode |raw }});
+				</script>
+			</div>
+			<div class="card-footer">
+				<h6 class="card-subtitle mb-2 text-muted">&nbsp</h6>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-4 col-md-6 col-xs-12">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">Gastos por meses</h5>
+			</div>
+			<div class="card-body">
+				<canvas id="myChart5" width="400" height="400"></canvas>
+				<script>
+					var ctx5 = document.getElementById("myChart5");
+					var myChart5 = new Chart(ctx5, {{ graficaAgrupacionesAnual["grafica"] | json_encode |raw }});
+				</script>
+			</div>
+			<div class="card-footer">
+				<h6 class="card-subtitle mb-2 text-muted">&nbsp</h6>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+
+{% endblock %}

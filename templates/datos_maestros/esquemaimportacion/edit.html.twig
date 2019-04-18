@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="col-md-4 offset-md-4 col-sm-8 offset-sm-2">
+        <div class="table-wrapper">
+			<div class="table-header">
+				<div class='table-title'>
+					<h2>{{ accion }} <b>Esquema de Importacion</b></h2>
+				</div>
+			</div>
+
+			<div class="table-body">
+				{{ form_start(form,{'action':'','method':'post'}) }}
+				<div class='form-group'>
+					<label>
+						Descripción
+						{{ form_errors(form.descripcion) }}
+						{{ form_widget(form.descripcion) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Cuenta
+						{{ form_errors(form.cuenta) }}
+						{{ form_widget(form.cuenta,{ 'attr' : { 'class' : 'form-group' } }) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Num. Lineas Cabecera
+						{{ form_errors(form.lineasCabecera) }}
+						{{ form_widget(form.lineasCabecera) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Separador Campos
+						{{ form_errors(form.separadorCampos) }}
+						{{ form_widget(form.separadorCampos) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Inv. Signo
+						{{ form_errors(form.inversionSigno) }}
+						{{ form_widget(form.inversionSigno) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Punto Decimal
+						{{ form_errors(form.puntoDecimal) }}
+						{{ form_widget(form.puntoDecimal) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Separador Miles
+						{{ form_errors(form.separadorMiles) }}
+						{{ form_widget(form.separadorMiles) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Formato Fecha
+						{{ form_errors(form.formatoFecha) }}
+						{{ form_widget(form.formatoFecha) }}
+					</label>
+				</div>
+
+
+				<div class='form-group'>
+					<label>
+						Campo 1
+						{{ form_errors(form.campo1) }}
+						{{ form_widget(form.campo1) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 2
+						{{ form_errors(form.campo2) }}
+						{{ form_widget(form.campo2) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 3
+						{{ form_errors(form.campo3) }}
+						{{ form_widget(form.campo3) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 4
+						{{ form_errors(form.campo4) }}
+						{{ form_widget(form.campo4) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 5
+						{{ form_errors(form.campo5) }}
+						{{ form_widget(form.campo5) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 6
+						{{ form_errors(form.campo6) }}
+						{{ form_widget(form.campo6) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 7
+						{{ form_errors(form.campo7) }}
+						{{ form_widget(form.campo7) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 8
+						{{ form_errors(form.campo8) }}
+						{{ form_widget(form.campo8) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 9
+						{{ form_errors(form.campo9) }}
+						{{ form_widget(form.campo9) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Campo 10
+						{{ form_errors(form.campo10) }}
+						{{ form_widget(form.campo10) }}
+					</label>
+				</div>
+				<div class="modal-footer">
+					<div class="form-group"><a class='btn btn-danger' href="{{ path('subclase_index') }}">Volver</a></div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+{% endblock %}

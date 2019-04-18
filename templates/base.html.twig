@@ -1,12 +1,114 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}My Finance{% endblock %}</title>
+        {% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}" />
+			<link rel="stylesheet" href="{{ asset('public/css/font-awesome/css/font-awesome.min.css') }}" />
+			<link rel="stylesheet" href="{{ asset('public/css/styles.css') }}" />
+		{% endblock %}
+		{% block javascripts %}
+			<script src="{{ asset('public/js/jquery-3.2.1.js') }}"></script>
+			<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
+			<script src="{{ asset('public/js/Chart.bundle.min.js') }}"></script>
+		{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+		<header>
+			{% if app.user !=null %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="{{ path('inicio_index') }}">My Finance</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Anotaciones
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('anotacion_index') }}">Mantener Anotaciones</a>
+                    <a class="dropdown-item" href="{{ path('anotacion_sinclasificar') }}">Anotaciones sin Clasificar</a>
+                  </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Presupuestos
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('presupuesto_index') }}">Mantener Presupuestos</a>
+                    <a class="dropdown-item" href="{{ path('presupuesto_planificacion') }}">Planificacion</a>
+                  </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Datos Maestros
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('cuenta_index') }}">Cuentas</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('clase_index') }}">Categorias</a>
+                    <a class="dropdown-item" href="{{ path('subclase_index') }}">SubCategorias</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('agrupacion_index') }}">Agrupaciones</a>
+                    <a class="dropdown-item" href="{{ path('version_index') }}">Versiones</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('plancargo_index') }}">Planes de Cargo</a>
+                    <a class="dropdown-item" href="{{ path('formapago_index') }}">Formas de Pago</a>
+                  </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Importar Datos
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('importacion_index') }}">Importaciones</a>
+                    <a class="dropdown-item" href="{{ path('esquemaimportacion_index') }}">Esquemas de importacion</a>
+                  </div>
+                </li>
+
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+								<span class="navbar-text">{% if app.user !=null %} {{ app.user.apellidos }}, {{ app.user.nombre }} <a href="{{path("logout")}}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>{% endif %}</span>
+							</ul>
+
+            </div>
+          </nav>
+
+			{% endif %}
+
+		</header>
+		<div class="container-fluid">
+			{% block container %}
+			{% endblock %}
+		</div>
+		{% for flash_message in app.session.flashbag.get('success') %}
+			<div class="alert alert-success">
+				{{ flash_message }}
+			</div>
+		{% endfor %}
+		{% for flash_message in app.session.flashbag.get('error') %}
+			<div class="alert alert-danger">
+				{{ flash_message }}
+			</div>
+		{% endfor %}
+		{% for flash_message in app.session.flashbag.get('notice') %}
+			<div class="alert alert-warning">
+				{{ flash_message }}
+			</div>
+		{% endfor %}
+
     </body>
+
+	{% block javascript_final %}
+	{% endblock %}
 </html>

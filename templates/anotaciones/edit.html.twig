@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-2 col-sm-8 offset-sm-2">
+      <div class="table-wrapper">
+        <div class="table-header">
+          <div class='table-title'>
+            <h2>{{ accion }}
+              <b>anotacion</b>
+            </h2>
+          </div>
+        </div>
+
+        <div class="table-body">
+          {{ form_start(form,{'action':'','method':'post'}) }}
+          <div class='form-group'>
+            <label>
+              Concepto
+              {{ form_errors(form.concepto) }}
+              {{ form_widget(form.concepto) }}
+            </label>
+          </div>
+          <div class='form-group'>
+            <label>
+              Categoria
+              {{ form_errors(form.clase) }}
+              {{ form_widget(form.clase,{ 'attr' : { 'class' : 'form-group' } }) }}
+            </label>
+          </div>
+          <div class='form-group'>
+            <label>
+              Subcategoria
+              {{ form_errors(form.subclase) }}
+              {{ form_widget(form.subclase,{ 'attr' : { 'class' : 'form-group' } }) }}
+            </label>
+          </div>
+          <div class='form-group'>
+            <label>
+              Fecha Gasto
+              {{ form_errors(form.fechaGasto) }}
+              {{ form_widget(form.fechaGasto,{ 'attr' : { 'class' : 'form-group' } }) }}
+            </label>
+          </div>
+          <div class='form-group'>
+            <label>
+              Importe
+              {{ form_errors(form.importe) }}
+              {{ form_widget(form.importe,{ 'attr' : { 'class' : 'form-group' } }) }}
+            </label>
+          </div>
+          <div class='form-group'>
+            <label>
+              Forma de Pago
+              {{ form_errors(form.formaPago) }}
+              {{ form_widget(form.formaPago,{ 'attr' : { 'class' : 'form-group' } }) }}
+            </label>
+          </div>
+          <div class='form-group'>
+            <label>
+              Agrupacion de Gastos
+              {{ form_errors(form.agrupacion) }}
+              {{ form_widget(form.agrupacion,{ 'attr' : { 'class' : 'form-group' } }) }}
+            </label>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group">
+              <a class='btn btn-danger boton_volver' href="{{ path('anotacion_index') }}">Volver</a>
+            </div>
+            {{ form_widget(form.Guardar)}}
+            {{ form_widget(form._token) }}
+            {{ form_end(form,{'render_rest': false}) }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+{% endblock %}
+
+{% block javascript_final %}
+
+  <script>
+    $('.form-control').change(function() {
+      var clase = $(this);
+      var form = clase.closest('form');
+
+      var idClase = clase.attr('id');
+      var tipoElemento = idClase.split('_')[2];
+
+      if (tipoElemento == 'clase') {
+        var idSubClase = "#appbundle_clase_subclase";
+
+        $.ajax({
+          url: "{{ path('ajax-obtiene-subclases') }}",
+          type: 'POST',
+          data: {
+            id: clase.val()
+          },
+          success: function(html) {
+
+            // la variable html representa toda la página junto con el select de estados. el cual tomamos y colocamos para reemplazar el select actual.
+
+            $(idSubClase).empty().append(html);
+          }
+        });
+
+      }
+    });
+  </script>
+{% endblock %}

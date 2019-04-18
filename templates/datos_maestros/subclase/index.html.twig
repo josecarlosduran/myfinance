@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12">
+        <div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class=" col-md-6 col-sm-6">
+						<h2>Mantener <b>SubCategorias</b></h2>
+					</div>
+					<div class=" col-md-6 col-sm-6">
+						<a href="{{ path('subclase_new') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> <span>Nueva SubCategoria</span></a>
+					</div>
+				</div>
+			</div>
+
+
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Clase</th>
+						<th>Descripcion</th>
+						<th>Contra Cuenta</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for subclase in subclases %}
+							<td>{{ subclase.clase.descripcion }}</td>
+							<td>{{ subclase.descripcion }}</td>
+							<td>{% if subclase.cuenta != null %} {{ subclase.cuenta.descripcion }} {% endif %}</td>
+							<td>
+								<a href="{{ path('subclase_edit', { 'id': subclase.id }) }}"><span class="fa fa-edit" aria-hidden="true"></span></a>
+								<a class="openDeleteModal" href="#deleteSubclaseModal" data-toggle="modal" data-id="{{ subclase.id }}"><span class="fa fa-trash" aria-hidden="true"></span></a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+				{{ include('paginacion.html.twig',{'ruta_index' : 'subclase_index', 'numPag' : numPag, 'pagesCount' : pagesCount}) }}
+    </div>
+
+
+	<!-- Delete Modal HTML -->
+	<div id="deleteSubclaseModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="{{ path('subclase_delete') }}" method="get">
+					<div class="modal-header">
+						<h4 class="modal-title">Borrar SubCategoria</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>¿Estas Seguro de Borrar esta SubCategoria?</p>
+						<p class="text-warning"><small>Esta Accion no se puede deshacer</small></p>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" id="idborrar" name="id" value="0">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="btn btn-danger" value="Delete">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+			$(document).on("click", ".openDeleteModal", function () {
+				var idDelete = $(this).data('id');
+				$('#idborrar').val(idDelete);
+
+			});
+
+	</script>
+
+{% endblock %}
+
+{% block body %}
+
+
+{% endblock %}

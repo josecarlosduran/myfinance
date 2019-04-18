@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="col-md-4 offset-md-4 col-sm-8 offset-sm-2">
+        <div class="table-wrapper">
+			<div class="table-header">
+				<div class='table-title'>
+					<h2>{{ accion }} <b>Plan de Cargo</b></h2>
+				</div>
+			</div>
+
+			<div class="table-body">
+				{{ form_start(form,{'action':'','method':'post'}) }}
+				<div class='form-row'>
+					<div class="col-md-12  col-sm-12">
+
+						<label>
+							Descripción
+							{{ form_errors(form.descripcion) }}
+							{{ form_widget(form.descripcion) }}
+						</label>
+					</div>
+				</div>
+				<div class='form-row'>
+					<div class="col-md-3  col-sm-12">
+
+						<label>
+							Dia Inicial
+							{{ form_errors(form.diaInicial1) }}
+							{{ form_widget(form.diaInicial1) }}
+						</label>
+					</div>
+					<div class="col-md-3  col-sm-12">
+						<label>
+							Dia Fin
+							{{ form_errors(form.diaFinal1) }}
+							{{ form_widget(form.diaFinal1) }}
+						</label>
+					</div>
+					<div class="col-md-3  col-sm-12">
+						<label>
+							Dia Cargo
+							{{ form_errors(form.diaCargo1) }}
+							{{ form_widget(form.diaCargo1) }}
+						</label>
+					</div>
+					<div class="col-md-3  col-sm-12">
+						<label>
+							Inc. Mes
+							{{ form_errors(form.incrementoMes1) }}
+							{{ form_widget(form.incrementoMes1) }}
+						</label>
+					</div>
+				</div>
+				<div class='form-row'>
+					<div class="col-md-3  col-sm-12">
+						<label>
+							Dia Inicial 2
+							{{ form_errors(form.diaInicial2) }}
+							{{ form_widget(form.diaInicial2) }}
+						</label>
+					</div>
+					<div class="col-md-3  col-sm-12">
+						<label>
+							Dia Fin 2
+							{{ form_errors(form.diaFinal2) }}
+							{{ form_widget(form.diaFinal2) }}
+						</label>
+					</div>
+					<div class="col-md-3  col-sm-12">
+						<label>
+							Dia Cargo 2
+							{{ form_errors(form.diaCargo2) }}
+							{{ form_widget(form.diaCargo2) }}
+						</label>
+					</div>
+					<div class="col-md-3  col-sm-12">
+						<label>
+							Inc. Mes 2
+							{{ form_errors(form.incrementoMes2) }}
+							{{ form_widget(form.incrementoMes2) }}
+						</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="form-group"><a class='btn btn-danger' href="{{ path('plancargo_index') }}">Volver</a></div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+{% endblock %}

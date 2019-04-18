@@ -1,0 +1,287 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+  <div class="row">
+    {% set mesActual = "now" | date('n') %}
+    <div class="col-lg-10 offset-lg-1 col-md-12">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Planificacion
+                <b>Presupuestos</b>
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <form class="form-inline" method="get" action="{{ path('presupuesto_planificacion')}}">
+          <select name="anyoselect" class="form-control">
+            {% for a in anyos %}
+              {% if anyoSelect == a.id %}
+                {% set seleccionado = 'selected' %}
+              {% else %}{% set seleccionado = '' %}
+              {% endif %}
+              <option {{ seleccionado }} value="{{ a.id }}">{{ a.anyo }}</option>
+            {% endfor %}
+          </select>
+
+          <button type="submit" class="btn btn-default">Cambiar</button>
+        </form>
+
+        <div class="table-body" style="margin-top:10px">
+          <ul class="nav nav-tabs">
+            {% for mes in meses %}
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu{{ mes.id }}">{{ mes.mes }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <div class="tab-content">
+            {% for mes in meses %}
+              {% set extrapolacionTotal = 0 %}
+              {% set total = 0 %}
+              {% set claseAnterior = 0 %}
+              <div id="menu{{ mes.id }}" class="tab-pane fade">
+
+                <h4>
+                  <div class="col-md-12 " style="margin-top:20px;">
+                    <span class="badge badge-primary">Saldo Mes Anterior</span>
+                    <span class="badge badge-warning">
+                      {{ saldoMesAnterior[mes.id]|number_format(2) }}</span>
+                    <span class="badge badge-primary">Gastos Presup</span>
+                    <span class="badge badge-warning">
+                      {{ gastosPresupuesto[mes.id]|default(0) }}</span>
+                    <span class="badge badge-primary">Saldo Final Presupuestado</span>
+                    <span class="badge badge-warning">{{ (saldoMesAnterior[mes.id] + gastosPresupuesto[mes.id]|default(0) + ingresosPresupuesto[mes.id]|default(0))|number_format(2) }}</span>
+                  </div>
+                  <div class="col-md-12 " style="margin-top:20px;">
+                    <span class="badge badge-primary">Saldo Actual</span>
+                    <span id="saldoTotal{{ mes.id }}" class="badge badge-warning">0</span>
+                    {% if mes.id == mesActual %}
+                      <span class="badge badge-primary">Saldo Final Extrapolado</span>
+                      <span id="saldoExtrapolado{{ mes.id }}" class="badge badge-warning">0</span>
+                    {% else %}
+                      {% if mes.id < 12 %}
+                        {% set mesSiguiente = mes.id + 1 %}
+                      {% else %}
+                        {% set mesSiguiente = 12 %}
+                      {% endif %}
+                      <span class="badge badge-primary">Saldo Final Mes</span>
+                      <span id="saldoFinalMes" class="badge badge-warning">{{ saldoMesAnterior[mesSiguiente]|number_format(2) }}</span>
+                    {% endif %}
+
+                  </div>
+                </h4>
+
+                <div class="clearfix"></div>
+                <div class="panel-group" id="accordion" style="margin-top:20px;">
+
+                  {% for presupuestoMes in presupuestoMeses %}
+                    {% if presupuestoMes.idClase != claseAnterior %}
+                      {% if claseAnterior != 0 %}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ mes.id }}{{ presupuestoMes.idClase }}">
+                        <div class="btn-group">
+                          <div class="btn btn-primary " style="width:100px;">Categoria</div>
+                          <div class="btn btn-info " style="width:150px;text-align:left">{{ presupuestoMes.descripcionClase}}</div>
+                          <div class="btn btn-primary" style="width:100px">Presupuesto</div>
+                          <div class="btn btn-info" style="width:90px;text-align:right">
+                            {% if totales[mes.id][presupuestoMes.idClase] is defined %}
+                              {{ totales[mes.id][presupuestoMes.idClase]|number_format(2) }}
+                            {% else %}-{% endif %}
+                          </div>
+                          <div class="btn btn-primary" style="width:50px">Real</div>
+                          {% if movimientos[mes.id]['totales'][presupuestoMes.idClase] is defined %}
+                            {% if totales[mes.id][presupuestoMes.idClase] is defined %}
+                              {% if movimientos[mes.id]['totales'][presupuestoMes.idClase] < totales[mes.id][presupuestoMes.idClase] %}
+                                {% set color = 'btn-danger' %}
+                              {% else %}
+                                {% set color = 'btn-success' %}
+                              {% endif %}
+                            {% else %}
+                              {% set color = 'btn-danger' %}
+                            {% endif %}
+                          {% else %}
+                            {% set color = 'btn-success' %}
+                          {% endif %}
+                          <div class="btn {{ color }}" style="width:90px;text-align:right">
+                            {% if movimientos[mes.id]['totales'][presupuestoMes.idClase] is defined %}
+                              {{ movimientos[mes.id]['totales'][presupuestoMes.idClase]|number_format(2) }}
+                            {% else %}0{% endif %}
+                          </div>
+                        </div>
+
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapse{{ mes.id }}{{ presupuestoMes.idClase }}" class="panel-collapse collapse ">
+                    <div class="panel-body">
+                      {% set claseAnterior = presupuestoMes.idClase%}
+                    {% endif %}
+
+                    <div class="btn-group" style="margin-top: 5px">
+                      <div class="btn btn-primary" style="width:100px;margin-left: 20px">Subcategoria</div>
+                      <div class="btn btn-info" style="width:210px;text-align:left">{{ presupuestoMes.descripcionSubclase}}</div>
+                      <div class="btn btn-primary" style="width:100px">Presupuesto</div>
+                      <div class="btn btn-info" style="width:90px;text-align:right">
+                        {% if presupuestoMes.meses[mes.id]['importe'] is defined %}
+                          {{ presupuestoMes.meses[mes.id]['importe']|number_format(2) }}
+                        {% else %}-{% endif %}
+                      </div>
+                      <div class="btn btn-primary" style="width:50px">Real</div>
+                      {% if movimientos[mes.id]['res'][presupuestoMes.idSubclase] is defined %}
+                        {% if presupuestoMes.meses[mes.id] is defined %}
+                          {% if movimientos[mes.id]['res'][presupuestoMes.idSubclase] < presupuestoMes.meses[mes.id]['importe'] %}
+                            {% set color = 'btn-danger' %}
+                          {% else %}
+                            {% set color = 'btn-success' %}
+                          {% endif %}
+                        {% else %}
+                          {% set color = 'btn-danger' %}
+                        {% endif %}
+                      {% else %}
+                        {% set color = 'btn-success' %}
+                      {% endif %}
+                      <div class="btnAnotacion btn {{ color }}" data-toggle="modal" data-target="#AnotacionModal" data-subclase="{{ presupuestoMes.idSubclase }}" data-mes="{{ mes.id }}" style="width:90px;text-align:right">
+                        {% if movimientos[mes.id]['res'][presupuestoMes.idSubclase] is defined %}
+                          {{ movimientos[mes.id]['res'][presupuestoMes.idSubclase]|number_format(2) }}
+                        {% else %}0{% endif %}
+                      </div>
+                      {% if presupuestoMes.meses[mes.id]['unico'] is defined and presupuestoMes.meses[mes.id]['unico'] == 0 %}
+                        {% if movimientos[mes.id]['res'][presupuestoMes.idSubclase] is defined %}
+                          {% set acumulado = movimientos[mes.id]['res'][presupuestoMes.idSubclase] %}
+                        {% else %}{% set acumulado = 0 %}
+                        {% endif %}
+                        {% set diaActual = "now" | date('d') %}
+                        {% set ultimoDiaMes = "now" | date_modify('last day of this month') %}
+                        {% set diasMes = ultimoDiaMes | date('d') %}
+
+                        {% set media = acumulado / diaActual %}
+                        {% set extrapolacion = media * diasMes %}
+
+                        {% if movimientos[mes.id]['res'][presupuestoMes.idSubclase] is defined %}
+                          {% if presupuestoMes.meses[mes.id] is defined %}
+                            {% if extrapolacion < presupuestoMes.meses[mes.id]['importe'] %}
+                              {% set color = 'btn-danger' %}
+                            {% else %}
+                              {% set color = 'btn-success' %}
+                            {% endif %}
+                          {% else %}
+                            {% set color = 'btn-danger' %}
+                          {% endif %}
+                        {% else %}
+                          {% set color = 'btn-success' %}
+                        {% endif %}
+
+                        {% set extrapolacionTotal = extrapolacionTotal + extrapolacion %}
+                        {% if mes.id == mesActual %}
+                          <div class="btn btn-primary" style="width:110px">Extrapolacion</div>
+                          <div class="btn {{ color }}" style="width:80px;text-align:right">{{ extrapolacion|number_format(2) }}</div>
+                        {% endif %}
+                      {% else %}
+                        {% if movimientos[mes.id]['res'][presupuestoMes.idSubclase] is defined %}
+                          {% set acumulado = movimientos[mes.id]['res'][presupuestoMes.idSubclase] %}
+                        {% else %}{% set acumulado = 0 %}
+                        {% endif %}
+                        {% set extrapolacionTotal = extrapolacionTotal + acumulado %}
+                      {% endif %}
+                      {% set total = total + acumulado %}
+                    </div>
+                    <div class="clearfix"></div>
+
+                  {% endfor %}
+                  {% set saldoExtrapolacion = extrapolacionTotal + saldoMesAnterior[mes.id] %}
+                  {% set saldoTotal = total + saldoMesAnterior[mes.id] %}
+
+                  <script>
+                    $('#saldoExtrapolado{{ mes.id }}').text('{{ saldoExtrapolacion|number_format(2) }}');
+                    $('#saldoTotal{{ mes.id }}').text('{{ saldoTotal|number_format(2) }}');
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- Anotaciones Modal HTML -->
+  <div id="AnotacionModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h3 class="modal-title">Anotaciones
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+
+        <div class="modal-body">
+
+          <table class="table table-striped table-hover table-responsive letra-pequeña">
+            <thead>
+              <tr>
+                <th class="col-md-6 centrado">Concepto</th>
+                <th class="col-md-3 centrado">Fecha</th>
+                <th class="col-md-3 derecha">Importe</th>
+              </tr>
+            </thead>
+            <tbody id="lineas"></tbody>
+          </table>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript_final %}
+<script>
+  $(document).ready(function() {
+    activaTab('menu' + {{ mesActual }});
+
+    $('.btnAnotacion').click(function() {
+      var anyo = {{ anyo }};
+      var mes = $(this).data('mes');
+      var subclase = $(this).data('subclase');
+
+      $.ajax({
+        url: "{{ path('ajax-obtiene-anotaciones') }}",
+        type: 'POST',
+        data: {
+          'anyo': anyo,
+          'mes': mes,
+          'subclase': subclase
+        },
+        success: function(html) {
+          $(lineas).empty().append(html);
+        }
+      });
+
+    });
+
+  });
+
+  function activaTab(tab) {
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+  };
+</script>
+{% endblock %}

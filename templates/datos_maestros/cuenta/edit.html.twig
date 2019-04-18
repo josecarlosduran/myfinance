@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+        <div class="table-wrapper">
+			<div class="table-header">
+				<div class='table-title'>
+					<h2>{{ accion }} <b>Cuenta</b></h2>
+				</div>
+			</div>
+
+			<div class="table-body">
+				{{ form_start(form,{'action':'','method':'post'}) }}
+				<div class='form-group'>
+					<label>
+						Descripción
+						{{ form_errors(form.descripcion) }}
+						{{ form_widget(form.descripcion) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						IBAN
+						{{ form_errors(form.IBAN) }}
+						{{ form_widget(form.IBAN) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Cuenta de Ahorro
+						{{ form_errors(form.cuentaAhorro) }}
+						{{ form_widget(form.cuentaAhorro) }}
+					</label>
+				</div>
+				<div class="modal-footer">
+					<div class="form-group"><a class='btn btn-danger' href="{{ path('cuenta_index') }}">Volver</a></div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+    <ul>
+        <li>
+
+        </li>
+    </ul>
+{% endblock %}

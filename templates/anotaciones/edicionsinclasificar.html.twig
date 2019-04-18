@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+	<div class="col-md-12 ">
+        <div class="table-wrapper">
+			<div class="table-header">
+				<div class='table-title'>
+					<h2><b>Anotaciones sin clasificar</b></h2>
+				</div>	
+			</div>
+			
+			<div class="table-body">
+			{{ form_start(formAnotaciones,{'action':'','method':'post','attr': {'class': 'form-inline'}}) }}
+			{% for anotacion in formAnotaciones.anotaciones %}
+				<div class='row'>
+					<div class='col-md-12'>
+						<div class='col-md-8'>
+							{{ form_errors(anotacion.conceptoBanco) }}
+							{{ form_widget(anotacion.conceptoBanco,{'attr': {'size':105}}) }}
+						</div>
+						<div class='col-md-2'>
+							{{ form_errors(anotacion.fechaGasto) }}
+							{{ form_widget(anotacion.fechaGasto,{'attr': {'size':6}}) }}
+						</div>
+						<div class='col-md-2'>
+							{{ form_errors(anotacion.importe) }}
+							{{ form_widget(anotacion.importe,{'attr': {'size':20}}) }}
+						</div>
+					</div>
+				</div>
+				
+				<div class='col-md-12'>
+					<div class='col-md-3' >
+						{{ form_errors(anotacion.concepto) }}
+						{{ form_widget(anotacion.concepto) }}
+					</div>
+					<div class='col-md-2'>
+						{{ form_errors(anotacion.clase) }}
+						{{ form_widget(anotacion.clase) }}
+					</div>
+					<div class='col-md-2'>
+						{{ form_errors(anotacion.subclase) }}
+						{{ form_widget(anotacion.subclase) }}
+					</div>
+					<div class='col-md-2'>
+						{{ form_errors(anotacion.formaPago) }}
+						{{ form_widget(anotacion.formaPago) }}
+					</div>
+					<div class='col-md-2'>
+						{{ form_errors(anotacion.agrupacion) }}
+						{{ form_widget(anotacion.agrupacion) }}
+					</div>
+				</div>
+			{% endfor %}
+			<div class="modal-footer">
+					
+					{{ form_widget(formAnotaciones.Guardar) }}
+			</div>
+			
+			</div>
+		</div>	
+
+	</div>
+
+    
+{% endblock %}
+
+
+{% block javascript_final %}
+	
+	<script>
+ 	$('.form-control').change(function() {
+		$clase = $(this);
+		$form = $clase.closest('form');
+		
+		$idClase = $clase.attr('id');
+		$tipoElemento = $idClase.split('_')[4]; 
+		
+
+		if ($tipoElemento == 'clase'){
+			$numClase = $idClase.split('_')[3];
+			var idSubClase = "#appbundle_clase_anotaciones_"+$numClase+"_subclase";
+			
+			
+			
+			$.ajax({
+				url : "{{ path('ajax-obtiene-subclases') }}",
+				type: 'POST',
+				data : { id : $clase.val() },
+				success: function(html) {
+
+					// la variable html representa toda la página junto con el select de estados.
+					// el cual tomamos y colocamos para reemplazar el select actual.
+					
+					$(idSubClase).empty().append(html);
+				}
+			});
+    
+
+			
+		}
+	});
+	</script>
+{% endblock %}

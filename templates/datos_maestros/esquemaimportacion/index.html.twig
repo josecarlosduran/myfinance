@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="col-lg-8 offset-lg-2 col-md-12">
+        <div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class=" col-md-6 col-sm-6">
+						<h2>Mantener <b>Esquemas de importacion</b></h2>
+					</div>
+					<div class=" col-md-6 col-sm-6">
+						<a href="{{ path('esquemaimportacion_new') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> <span>Nuevo Esquema de Importacion</span></a>
+					</div>
+				</div>
+			</div>
+
+
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Descripcion</th>
+						<th>Cuenta</th>
+						<th>Lineas Cab.</th >
+						<th>Sep. Campos</th>
+						<th>Inv. Signo</th>
+						<th>Punto Decimal</th>
+						<th>Sep. Miles</th>
+						<th>Formato Fecha</th>
+
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for esquemaimportacion in esquemasimportacion %}
+
+							<td class=" col-md-3 col-sm-6">{{ esquemaimportacion.descripcion }}</td>
+							<td class=" col-md-2 col-sm-6">{{ esquemaimportacion.cuenta.descripcion }}</td>
+							<td class=" col-md-1 col-sm-6">{{ esquemaimportacion.lineasCabecera }}</td>
+							<td class=" col-md-1 col-sm-6">{{ esquemaimportacion.separadorCampos }}</td>
+							<td class=" col-md-1 col-sm-6">{% if esquemaimportacion.inversionSigno == 1 %}Si{% else %}No{% endif %}</td>
+							<td class=" col-md-1 col-sm-6">{{ esquemaimportacion.puntoDecimal }}</td>
+							<td class=" col-md-1 col-sm-6">{{ esquemaimportacion.separadorMiles }}</td>
+
+							<td class=" col-md-1 col-sm-6">{{ esquemaimportacion.formatoFecha }}</td>
+
+							<td class=" col-md-1 col-sm-6">
+								<a href="{{ path('esquemaimportacion_edit', { 'id': esquemaimportacion.id }) }}"><span class="fa fa-edit" aria-hidden="true"></span></a>
+								<a class="openDeleteModal" href="#deleteSubclaseModal" data-toggle="modal" data-id="{{ esquemaimportacion.id }}"><span class="fa fa-trash" aria-hidden="true"></span></a>
+							</td>
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{ include('paginacion.html.twig',{'ruta_index' : 'esquemaimportacion_index', 'numPag' : numPag, 'pagesCount' : pagesCount}) }}
+
+    </div>
+
+
+	<!-- Delete Modal HTML -->
+	<div id="deleteSubclaseModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="{{ path('esquemaimportacion_delete') }}" method="get">
+					<div class="modal-header">
+						<h4 class="modal-title">Borrar Esquema de Importacion</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>¿Estas Seguro de Borrar este Esquema de Importacion?</p>
+						<p class="text-warning"><small>Esta Accion no se puede deshacer</small></p>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" id="idborrar" name="id" value="0">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="btn btn-danger" value="Delete">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+			$(document).on("click", ".openDeleteModal", function () {
+				var idDelete = $(this).data('id');
+				$('#idborrar').val(idDelete);
+
+			});
+
+	</script>
+
+{% endblock %}
+
+{% block body %}
+
+
+{% endblock %}

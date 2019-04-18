@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="row justify-content-center">
+        <div class="table-wrapper">
+			<div class="table-header">
+				<div class='table-title'>
+					<h2>{{ accion }} <b>Presupuesto</b></h2>
+				</div>
+			</div>
+
+			<div class="table-body">
+				{{ form_start(form,{'action':'','method':'post'}) }}
+				<div class='form-group'>
+					<label>
+						Año
+						{{ form_errors(form.anyo) }}
+						{{ form_widget(form.anyo) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Meses
+						{{ form_errors(form.meses) }}
+						{{ form_widget(form.meses) }}
+					</label>
+				<p class="text-warning"><small>Si quiere cambiar el mes borre el presupuesto y cree nuevo</small></p>
+				</div>
+
+				<div class='form-group'>
+					<label>
+						Categoria
+						{{ form_errors(form.clase) }}
+						{{ form_widget(form.clase) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Subcategoria
+						{{ form_errors(form.subclase) }}
+						{{ form_widget(form.subclase) }}
+					</label>
+				</div>
+				<div class='form-group'>
+					<label>
+						Importe
+						{{ form_errors(form.importe) }}
+						{{ form_widget(form.importe) }}
+					</label>
+				</div
+				<div class='form-group'>
+					<label>
+						Cargo Unico
+						{{ form_errors(form.unico) }}
+						{{ form_widget(form.unico) }}
+					</label>
+				</div>
+				<div class="modal-footer">
+					<div class="form-group"><a class='btn btn-danger' href="{{ path('presupuesto_index') }}">Volver</a></div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+{% endblock %}
+{% block javascript_final %}
+
+	<script>
+ 	$('.form-control').change(function() {
+		var clase = $(this);
+		var form = clase.closest('form');
+
+		var idClase = clase.attr('id');
+		var tipoElemento = idClase.split('_')[1];
+
+
+		if (tipoElemento == 'clase'){
+
+			var idDestino = "#presupuesto"+"_"+"subclase";
+
+
+
+			$.ajax({
+				url : "{{ path('ajax-obtiene-subclases') }}",
+				type: 'POST',
+				data : { id : clase.val() },
+				success: function(html) {
+
+					// la variable html representa toda la página junto con el select de estados.
+					// el cual tomamos y colocamos para reemplazar el select actual.
+
+					$(idDestino).empty().append(html);
+				}
+			});
+
+
+
+		}
+	});
+	</script>
+{% endblock %}

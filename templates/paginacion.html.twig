@@ -1,0 +1,47 @@
+{% if numPag > 1 %}
+				{% set anteriorDisabled = '' %}
+				{% set pagAnterior = numPag - 1 %}
+			{% else %}
+				{% set anteriorDisabled = 'disabled' %}
+				{% set pagAnterior = 0 %}
+			{% endif %}
+
+			{% if numPag < pagesCount %}
+				{% set siguienteDisabled = '' %}
+				{% set pagSiguiente = numPag + 1 %}
+			{% else %}
+				{% set siguienteDisabled = 'disabled' %}
+				{% set pagSiguiente = 0 %}
+			{% endif %}
+
+			<div class="clearfix">
+                <div class="hint-text">Mostrando <b>{{ numPag }}</b> de <b>{{ pagesCount }}</b></div>
+                <ul class="pagination">
+                    <li class="page-item"><a href="{{ path( ruta_index , { 'numPag': 1 }) }}" class="page-link">Primera</a></li>
+					<li class="page-item {{ anteriorDisabled }}"><a href="{{ path(ruta_index, { 'numPag': pagAnterior }) }}" class="page-link"><</a></li>
+
+					{% for i in numPag - 5..numPag %}
+						{% if i > 0 %}
+							{% if numPag == i %}
+								{% set activo = 'active' %}
+							{% else %}
+								{% set activo = '' %}
+							{% endif %}
+							<li class="page-item {{ activo }}"><a href="{{ path(ruta_index, { 'numPag': i }) }}" class="page-link">{{ i }}</a></li>
+							{% endif %}
+						{% endfor %}
+
+					{% for i in numPag + 1..numPag + 5 %}
+						{% if i <= pagesCount %}
+
+							<li class="page-item "><a href="{{ path(ruta_index, { 'numPag': i }) }}" class="page-link">{{ i }}</a></li>
+							{% endif %}
+						{% endfor %}
+
+
+
+                    <li class="page-item {{ siguienteDisabled }}"><a href="{{ path(ruta_index, { 'numPag': pagSiguiente }) }}" class="page-link">></a></li>
+                    <li class="page-item"><a href="{{ path(ruta_index, { 'numPag': pagesCount }) }}" class="page-link">Ultima</a></li>
+				</ul>
+            </div>
+		</div>
